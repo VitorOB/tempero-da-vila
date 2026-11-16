@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+/* Fontes servidas pelo próprio site (subconjunto latino, variáveis) */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("/fonts/nunito-sans-latin.woff2") format("woff2");
+}
+
+@theme {
+  /* Paleta. Contrastes conferidos (WCAG):
+     ink #1F2A1F sobre cream: 14,5:1 · branco sobre brand: 6,4:1 · branco sobre tomato: 5,1:1
+     brand sobre butter: 5,7:1 · tomato sobre butter: 4,6:1 · muted sobre butter: 6,9:1
+     mustard: só decoração, nunca texto */
+  --color-cream: #fffbf3;
+  --color-butter: #fff1cc;
+  --color-ink: #1f2a1f;
+  --color-muted: #475447;
+  --color-brand: #2e6b3a;
+  --color-brand-dark: #234f2c;
+  --color-tomato: #c2412d;
+  --color-tomato-dark: #a3361f;
+  --color-mustard: #e8a33d;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+
+  /* Corpo mínimo de 17px; nada de texto corrido abaixo de 16px */
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word;
+  }
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
+}
+
+/* ---------- Componentes reutilizáveis ---------- */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem; /* 48px: acima do mínimo de 44px */
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 160ms var(--ease-out-soft), background-color 160ms;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-dark);
+  }
+  .btn-secondary {
+    background: #fff;
+    color: var(--color-brand);
+    box-shadow: inset 0 0 0 2px var(--color-brand);
+  }
+  .btn-secondary:hover {
+    background: var(--color-butter);
+  }
+  .btn-tomato {
+    background: var(--color-tomato);
+    color: #fff;
+  }
+  .btn-tomato:hover {
+    background: var(--color-tomato-dark);
+  }
+
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+  .stamp-tomato {
+    background: var(--color-tomato);
+    color: #fff;
+  }
+  .stamp-brand {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  .stamp-light {
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: 0 0 0 2px var(--color-mustard);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--color-tomato);
+    letter-spacing: 0.02em;
+  }
+  .section-title {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+    font-weight: 800;
+    color: var(--color-brand);
+  }
+
+  /* Toalha xadrez em opacidade baixa (decorativa) */
+  .gingham {
+    background-color: var(--color-butter);
+    background-image:
+      linear-gradient(90deg, rgb(232 163 61 / 0.22) 50%, transparent 50%),
+      linear-gradient(rgb(232 163 61 / 0.22) 50%, transparent 50%);
+    background-size: 44px 44px;
+  }
+  /* Azulejo simples em linhas finas (decorativo) */
+  .tiles {
+    background-image:
+      radial-gradient(circle at 50% 50%, transparent 9px, rgb(232 163 61 / 0.16) 10px, transparent 11px),
+      linear-gradient(rgb(232 163 61 / 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(232 163 61 / 0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .sr-only-focusable:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Animações (só transform e opacity) ---------- */
+
+/* 1. Entrada do hero: prato gira e cresce; selos aparecem depois.
+   O prato não começa invisível, para não atrasar o LCP. */
+@keyframes plate-in {
+  from {
+    transform: rotate(-14deg) scale(0.88);
+  }
+  to {
+    transform: rotate(0) scale(1);
+  }
+}
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.plate-in {
+  animation: plate-in 900ms var(--ease-out-soft) both;
+}
+.stamp-in {
+  animation: stamp-in 450ms var(--ease-out-soft) both;
+}
+
+/* 2. Painel de aba: troca suave */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+[role="tabpanel"]:not([hidden]) {
+  animation: panel-in 320ms var(--ease-out-soft) both;
+}
+.tab-indicator {
+  transform-origin: left center;
+  transition: transform 320ms var(--ease-out-soft);
+}
+
+/* 3. Cartões: sobem 4px e a foto ganha zoom leve */
+.card-lift {
+  transition: transform 220ms var(--ease-out-soft);
+}
+.card-lift .card-photo {
+  transition: transform 400ms var(--ease-out-soft);
+}
+@media (hover: hover) {
+  .card-lift:hover {
+    transform: translateY(-4px);
+  }
+  .card-lift:hover .card-photo {
+    transform: scale(1.05);
+  }
+}
+
+/* 4. Barra fixa: desliza de baixo para cima (as classes translate-y-* do Tailwind v4 usam a propriedade `translate`) */
+.sticky-bar {
+  transition:
+    translate 300ms var(--ease-out-soft),
+    visibility 0s linear 300ms;
+}
+.sticky-bar[data-visible="true"] {
+  transition:
+    translate 300ms var(--ease-out-soft),
+    visibility 0s;
+}
+
+/* 5. Revelação na rolagem: só fade */
+.reveal-ready .reveal {
+  opacity: 0;
+  transition: opacity 600ms ease-out;
+}
+.reveal-ready .reveal.is-visible {
+  opacity: 1;
+}
+
+/* Movimento reduzido: tudo estático */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal-ready .reveal {
+    opacity: 1;
+  }
+  .card-lift:hover,
+  .card-lift:hover .card-photo {
+    transform: none;
+  }
+}
