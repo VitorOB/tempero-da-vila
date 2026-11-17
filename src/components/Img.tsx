@@ -1,4 +1,5 @@
-import { images, type ImageKey } from "../data/site";
+import type { ImageKey } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 type Props = {
   name: ImageKey;
@@ -11,7 +12,7 @@ type Props = {
 
 /** Imagem WebP responsiva (800w e 1600w) com width/height para evitar salto de layout. */
 export function Img({ name, sizes, className, priority = false, decorative = false }: Props) {
-  const img = images[name];
+  const img = useSite().site.images[name];
   const height800 = Math.round((img.height / img.width) * 800);
   return (
     <img

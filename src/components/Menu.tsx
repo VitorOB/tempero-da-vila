@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Info, MessageCircle } from "lucide-react";
-import { contact, menu, menuSection, type MenuItem } from "../data/site";
-import { dishMessage, waLink } from "../lib/whatsapp";
+import type { MenuItem } from "../data/site";
+import { useSite } from "../i18n/lang";
+import { waLink } from "../lib/whatsapp";
 import { Img } from "./Img";
 
 const INDICATOR_BASE = 100; // largura base do indicador em px; a largura real vem do scaleX
 
 function OrderLink({ name, light = false }: { name: string; light?: boolean }) {
+  const { t } = useSite();
   return (
     <a
-      href={waLink(dishMessage(name))}
+      href={waLink(t.dishMessage(name))}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-4 text-base font-extrabold ${
@@ -17,7 +19,8 @@ function OrderLink({ name, light = false }: { name: string; light?: boolean }) {
       }`}
     >
       <MessageCircle aria-hidden="true" className="size-4" />
-      Pedir<span className="sr-only"> {name} pelo WhatsApp (abre em nova aba)</span>
+      {t.order}
+      <span className="sr-only">{t.orderDishSr(name)}</span>
     </a>
   );
 }
@@ -60,6 +63,8 @@ function ItemRow({ item }: { item: MenuItem }) {
 }
 
 export function Menu() {
+  const { lang, site, t } = useSite();
+  const { contact, menu, menuSection } = site;
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
@@ -71,7 +76,8 @@ export function Menu() {
     if (tab) setIndicator({ x: tab.offsetLeft, w: tab.offsetWidth });
   }, [active]);
 
-  useLayoutEffect(measure, [measure]);
+  // As abas mudam de largura com o idioma, então o indicador é medido de novo.
+  useLayoutEffect(measure, [measure, lang]);
 
   // Recalcula o indicador quando a largura muda (rotação, zoom, fonte carregada).
   useEffect(() => {
@@ -125,7 +131,7 @@ export function Menu() {
           <div
             ref={listRef}
             role="tablist"
-            aria-label="Categorias do cardápio"
+            aria-label={t.menuCategories}
             className="relative inline-flex min-w-full gap-1 border-b-2 border-ink/10"
           >
             {menu.map((cat, i) => (
@@ -195,7 +201,7 @@ export function Menu() {
         })}
 
         <div className="mt-10 flex flex-col items-start gap-3 rounded-3xl bg-brand p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8 on-dark">
-          <p className="font-display text-2xl font-extrabold">Já escolheu? Manda pra gente.</p>
+          <p className="font-display text-2xl font-extrabold">{t.chosen}</p>
           <a
             href={waLink(contact.whatsappMessage)}
             target="_blank"
@@ -204,7 +210,7 @@ export function Menu() {
           >
             <MessageCircle aria-hidden="true" className="size-5" />
             {menuSection.cta}
-            <span className="sr-only"> (abre em nova aba)</span>
+            <span className="sr-only"> {t.newTab}</span>
           </a>
         </div>
       </div>

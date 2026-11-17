@@ -8,9 +8,11 @@ import { Menu } from "./components/Menu";
 import { StickyOrderBar } from "./components/StickyOrderBar";
 import { WeekMenu } from "./components/WeekMenu";
 import { useReveal } from "./hooks/useReveal";
+import { useSite } from "./i18n/lang";
 
 export default function App() {
   useReveal();
+  const { t } = useSite();
 
   return (
     <>
@@ -18,7 +20,7 @@ export default function App() {
         href="#conteudo"
         className="sr-only-focusable fixed left-4 top-4 z-50 rounded-full bg-ink px-5 py-3 font-bold text-white"
       >
-        Pular para o conteúdo
+        {t.skipLink}
       </a>
       <Header />
       <main id="conteudo" tabIndex={-1} className="focus:outline-none">

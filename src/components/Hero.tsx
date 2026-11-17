@@ -1,12 +1,14 @@
 import { Clock, MessageCircle, UtensilsCrossed } from "lucide-react";
-import { contact, hero, weekSection } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { getTodayDish } from "../lib/today";
-import { dishMessage, waLink } from "../lib/whatsapp";
+import { waLink } from "../lib/whatsapp";
 import { Img } from "./Img";
 
 export function Hero() {
-  const today = getTodayDish();
-  const orderMessage = today ? dishMessage(`${today.dish} (prato do dia)`) : contact.whatsappMessage;
+  const { site, t } = useSite();
+  const { contact, hero, weekSection, weekMenu } = site;
+  const today = getTodayDish(weekMenu);
+  const orderMessage = today ? t.dishMessage(`${today.dish} ${t.dishOfDaySuffix}`) : contact.whatsappMessage;
 
   return (
     <section id="inicio" aria-labelledby="hero-title" className="relative overflow-hidden">
@@ -19,15 +21,15 @@ export function Hero() {
           >
             {today ? (
               <>
-                <span className="stamp stamp-tomato">Hoje!</span>
+                <span className="stamp stamp-tomato">{t.todayExcl}</span>
                 <span className="font-bold">
-                  <span className="sr-only">Prato do dia: </span>
+                  <span className="sr-only">{t.dishOfDayLabel}</span>
                   {today.dish}
                 </span>
               </>
             ) : (
               <>
-                <span className="stamp stamp-tomato">Domingo</span>
+                <span className="stamp stamp-tomato">{t.sunday}</span>
                 <span className="font-bold">{weekSection.closedToday}</span>
               </>
             )}
@@ -54,12 +56,12 @@ export function Hero() {
               className="btn btn-primary min-h-14 px-7 text-lg"
             >
               <MessageCircle aria-hidden="true" className="size-6" />
-              Pedir pelo WhatsApp
-              <span className="sr-only"> (abre em nova aba)</span>
+              {t.orderOnWhatsApp}
+              <span className="sr-only"> {t.newTab}</span>
             </a>
             <a href="#cardapio" className="btn btn-secondary min-h-14 px-7 text-lg">
               <UtensilsCrossed aria-hidden="true" className="size-5" />
-              Ver cardápio
+              {t.seeMenu}
             </a>
           </div>
         </div>

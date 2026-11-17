@@ -1,10 +1,12 @@
 import { CalendarDays, MessageCircle } from "lucide-react";
-import { weekMenu, weekSection } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { getWeekday } from "../lib/today";
-import { dishMessage, waLink } from "../lib/whatsapp";
+import { waLink } from "../lib/whatsapp";
 import { Img } from "./Img";
 
 export function WeekMenu() {
+  const { site, t } = useSite();
+  const { weekMenu, weekSection } = site;
   const weekday = getWeekday();
   const today = weekMenu.find((d) => d.weekday === weekday);
 
@@ -21,14 +23,14 @@ export function WeekMenu() {
           </div>
           {today && (
             <a
-              href={waLink(dishMessage(`${today.dish} (prato do dia)`))}
+              href={waLink(t.dishMessage(`${today.dish} ${t.dishOfDaySuffix}`))}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary self-start md:self-auto"
             >
               <MessageCircle aria-hidden="true" className="size-5" />
-              Pedir o prato de hoje
-              <span className="sr-only"> (abre o WhatsApp em nova aba)</span>
+              {t.orderTodaysDish}
+              <span className="sr-only"> {t.newTabWhatsApp}</span>
             </a>
           )}
         </div>
@@ -56,7 +58,8 @@ export function WeekMenu() {
               >
                 {isToday && (
                   <span className="stamp stamp-tomato absolute -top-3 right-4 shadow">
-                    Hoje<span className="sr-only">, prato do dia</span>
+                    {t.today}
+                    <span className="sr-only">{t.todayDishSr}</span>
                   </span>
                 )}
                 <span
@@ -87,7 +90,7 @@ export function WeekMenu() {
             />
           </div>
           <div className="flex flex-col items-start justify-center gap-4 p-6 sm:p-8">
-            <span className="stamp stamp-tomato">Sábado</span>
+            <span className="stamp stamp-tomato">{t.saturday}</span>
             <h3 className="text-3xl font-extrabold text-brand sm:text-4xl">{weekSection.saturdayTitle}</h3>
             <p className="text-lg">{weekSection.saturdayText}</p>
             <a
@@ -98,7 +101,7 @@ export function WeekMenu() {
             >
               <MessageCircle aria-hidden="true" className="size-5" />
               {weekSection.saturdayCta}
-              <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+              <span className="sr-only"> {t.viaWhatsAppNewTab}</span>
             </a>
           </div>
         </div>

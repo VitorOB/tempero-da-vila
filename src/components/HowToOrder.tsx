@@ -1,10 +1,12 @@
 import { MessageCircle, ShoppingBag, Smartphone, Utensils } from "lucide-react";
-import { contact, howSection, steps } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { waLink } from "../lib/whatsapp";
 
 const stepIcons = { utensils: Utensils, message: MessageCircle, bag: ShoppingBag };
 
 export function HowToOrder() {
+  const { site, t } = useSite();
+  const { contact, howSection, steps } = site;
   const hasDelivery = contact.deliveryUrl.trim() !== "";
 
   return (
@@ -21,7 +23,7 @@ export function HowToOrder() {
           {steps.map((s, i) => {
             const Icon = stepIcons[s.icon];
             return (
-              <li key={s.title} className="reveal relative rounded-3xl bg-white p-6 ring-1 ring-ink/10 sm:p-7">
+              <li key={s.icon} className="reveal relative rounded-3xl bg-white p-6 ring-1 ring-ink/10 sm:p-7">
                 <span
                   aria-hidden="true"
                   className="absolute right-5 top-4 font-display text-5xl font-extrabold text-butter"
@@ -32,7 +34,7 @@ export function HowToOrder() {
                   <Icon aria-hidden="true" className="size-7" />
                 </span>
                 <h3 className="mt-5 text-2xl font-extrabold text-ink">
-                  <span className="sr-only">Passo {i + 1}: </span>
+                  <span className="sr-only">{t.step(i + 1)}</span>
                   {s.title}
                 </h3>
                 <p className="mt-2 text-muted">{s.description}</p>
@@ -50,7 +52,7 @@ export function HowToOrder() {
           >
             <MessageCircle aria-hidden="true" className="size-6" />
             {howSection.whatsappCta}
-            <span className="sr-only"> (abre em nova aba)</span>
+            <span className="sr-only"> {t.newTab}</span>
           </a>
           {hasDelivery && (
             <a
@@ -61,7 +63,7 @@ export function HowToOrder() {
             >
               <Smartphone aria-hidden="true" className="size-6" />
               {howSection.deliveryCta}
-              <span className="sr-only"> (abre em nova aba)</span>
+              <span className="sr-only"> {t.newTab}</span>
             </a>
           )}
         </div>

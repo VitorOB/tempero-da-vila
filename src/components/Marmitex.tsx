@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Bike, Check, MessageCircle, Store } from "lucide-react";
-import { marmitexOptions, marmitexSection, marmitexSizes } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { marmitexMessage, waLink } from "../lib/whatsapp";
 import { Img } from "./Img";
 
 const optionIcons = { bike: Bike, store: Store };
 
 export function Marmitex() {
+  const { site, t } = useSite();
+  const { contact, marmitexOptions, marmitexSection, marmitexSizes } = site;
   const [size, setSize] = useState("M");
   const chosen = marmitexSizes.find((s) => s.id === size);
-  const message = marmitexMessage(chosen ? `${chosen.id} (${chosen.name})` : undefined);
+  const message = marmitexMessage(contact.marmitexMessage, chosen ? `${chosen.letter} (${chosen.name})` : undefined);
 
   return (
     <section id="marmitex" aria-labelledby="marmitex-title" className="gingham py-16 sm:py-20">
@@ -22,7 +24,7 @@ export function Marmitex() {
               className="absolute inset-0 size-full object-cover"
             />
             <span className="stamp stamp-tomato absolute left-4 top-4 px-4 py-2 text-lg shadow-md">
-              Entrega e retirada
+              {t.deliveryPickup}
             </span>
           </div>
 
@@ -59,12 +61,12 @@ export function Marmitex() {
                           checked ? "bg-brand text-white" : "bg-butter text-ink"
                         }`}
                       >
-                        {s.id}
+                        {s.letter}
                       </span>
                       <span>
                         <span className="block font-extrabold">
                           {s.name}
-                          <span className="sr-only"> ({s.id})</span>
+                          <span className="sr-only"> ({s.letter})</span>
                         </span>
                         <span className="block text-sm text-muted">{s.description}</span>
                       </span>
@@ -102,7 +104,7 @@ export function Marmitex() {
             >
               <MessageCircle aria-hidden="true" className="size-6" />
               {marmitexSection.cta}
-              <span className="sr-only">, tamanho {chosen?.name} (abre em nova aba)</span>
+              <span className="sr-only">{t.sizeSr(chosen?.name ?? "")}</span>
             </a>
             <p className="mt-4 text-muted">{marmitexSection.officeNote}</p>
           </div>

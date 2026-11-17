@@ -374,13 +374,18 @@ export const menu: MenuCategory[] = [
 /* Marmitex                                                            */
 /* ------------------------------------------------------------------ */
 
-export const marmitexSizes = [
-  { id: "P", name: "Pequena", description: "Para quem come pouco." },
-  { id: "M", name: "Média", description: "O almoço de todo dia." },
-  { id: "G", name: "Grande", description: "Para quem está com muita fome." },
+/** id: valor interno · letter: letra exibida no círculo e na mensagem. */
+export type MarmitexSize = { id: "P" | "M" | "G"; letter: string; name: string; description: string };
+
+export const marmitexSizes: MarmitexSize[] = [
+  { id: "P", letter: "P", name: "Pequena", description: "Para quem come pouco." },
+  { id: "M", letter: "M", name: "Média", description: "O almoço de todo dia." },
+  { id: "G", letter: "G", name: "Grande", description: "Para quem está com muita fome." },
 ];
 
-export const marmitexOptions = [
+export type IconItem<I extends string> = { icon: I; title: string; description: string };
+
+export const marmitexOptions: IconItem<"bike" | "store">[] = [
   {
     icon: "bike",
     title: "Entrega",
@@ -391,13 +396,13 @@ export const marmitexOptions = [
     title: "Retirada no balcão",
     description: "Peça antes e é só pegar, sem fila.",
   },
-] as const;
+];
 
 /* ------------------------------------------------------------------ */
 /* Como pedir                                                          */
 /* ------------------------------------------------------------------ */
 
-export const steps = [
+export const steps: IconItem<"utensils" | "message" | "bag">[] = [
   {
     icon: "utensils",
     title: "Escolha o prato",
@@ -413,7 +418,7 @@ export const steps = [
     title: "Receba ou retire",
     description: "Entregamos quentinho, ou você retira no balcão.",
   },
-] as const;
+];
 
 /* ------------------------------------------------------------------ */
 /* Onde estamos                                                        */
@@ -443,13 +448,13 @@ export const hoursNote = "Encomendas de marmitex a partir das 10h30.";
 /** Formato schema.org, usado no JSON-LD. */
 export const openingHoursSchema = ["Mo-Sa 11:00-15:00"];
 
-export const payments = [
+export const payments: { icon: "qr" | "cash" | "card" | "ticket"; label: string }[] = [
   { icon: "qr", label: "Pix" },
   { icon: "cash", label: "Dinheiro" },
   { icon: "card", label: "Cartão de débito" },
   { icon: "card", label: "Cartão de crédito" },
   { icon: "ticket", label: "Vale-refeição" },
-] as const;
+];
 
 /* ------------------------------------------------------------------ */
 /* Rodapé                                                              */
@@ -473,3 +478,35 @@ export const footer = {
 export const stickyBar = {
   label: "Pedir pelo WhatsApp",
 };
+
+/* ------------------------------------------------------------------ */
+/* Conjunto completo, usado pela troca de idioma (src/i18n).           */
+/* A versão em inglês fica em site.en.ts, com este mesmo formato.      */
+/* ------------------------------------------------------------------ */
+
+export const sitePt = {
+  contact,
+  brand,
+  seo,
+  nav,
+  hero,
+  weekSection,
+  menuSection,
+  marmitexSection,
+  howSection,
+  locationSection,
+  images,
+  weekMenu,
+  menu,
+  marmitexSizes,
+  marmitexOptions,
+  steps,
+  address,
+  hours,
+  hoursNote,
+  payments,
+  socials,
+  footer,
+  stickyBar,
+};
+export type SiteData = typeof sitePt;

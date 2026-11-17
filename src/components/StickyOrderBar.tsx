@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
-import { contact, stickyBar } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { waLink } from "../lib/whatsapp";
 
 /**
@@ -8,6 +8,8 @@ import { waLink } from "../lib/whatsapp";
  * O espaço que ela ocupa fica reservado no fim da página (ver App.tsx), então nada fica coberto.
  */
 export function StickyOrderBar() {
+  const { site, t } = useSite();
+  const { contact, stickyBar } = site;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export function StickyOrderBar() {
       >
         <MessageCircle aria-hidden="true" className="size-6" />
         {stickyBar.label}
-        <span className="sr-only"> (abre em nova aba)</span>
+        <span className="sr-only"> {t.newTab}</span>
       </a>
     </div>
   );

@@ -1,7 +1,8 @@
-import { brand } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 /** Logo textual. `light` para fundo escuro. */
 export function Logo({ light = false }: { light?: boolean }) {
+  const { brand } = useSite().site;
   return (
     <span className="flex items-center gap-2.5">
       <svg aria-hidden="true" viewBox="0 0 40 40" className="size-10 shrink-0">

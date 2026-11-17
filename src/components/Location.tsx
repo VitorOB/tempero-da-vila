@@ -1,11 +1,13 @@
 import { Banknote, Clock, CreditCard, MapPin, Navigation, QrCode, Ticket, Wallet } from "lucide-react";
-import { address, hours, hoursNote, locationSection, payments } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { getWeekday } from "../lib/today";
 import { Img } from "./Img";
 
 const paymentIcons = { qr: QrCode, cash: Banknote, card: CreditCard, ticket: Ticket };
 
 export function Location() {
+  const { site, t } = useSite();
+  const { address, hours, hoursNote, locationSection, payments } = site;
   const weekday = getWeekday();
 
   return (
@@ -28,15 +30,15 @@ export function Location() {
                 </span>
                 <div>
                   <h3 className="flex flex-wrap items-center gap-2 text-2xl font-extrabold">
-                    Endereço
-                    {address.isDemo && <span className="stamp stamp-light text-sm">Demonstrativo</span>}
+                    {t.address}
+                    {address.isDemo && <span className="stamp stamp-light text-sm">{t.demo}</span>}
                   </h3>
                   <address className="mt-2 not-italic">
                     {address.street}
                     <br />
                     {address.district} · {address.city} – {address.state}
                     <br />
-                    CEP {address.postalCode}
+                    {t.postalCode} {address.postalCode}
                   </address>
                   <p className="mt-2 text-muted">{address.reference}</p>
                 </div>
@@ -57,7 +59,7 @@ export function Location() {
                       <tr key={h.days} className={`border-t border-ink/10 first:border-t-0 ${isToday ? "bg-butter" : ""}`}>
                         <th scope="row" className="py-3 pl-3 pr-4 font-bold">
                           {h.days}
-                          {isToday && <span className="stamp stamp-tomato ml-2 text-sm">Hoje</span>}
+                          {isToday && <span className="stamp stamp-tomato ml-2 text-sm">{t.today}</span>}
                         </th>
                         <td className="py-3 pr-3 text-right">{h.time}</td>
                       </tr>
@@ -99,14 +101,14 @@ export function Location() {
               </span>
               <h3 className="text-2xl font-extrabold">
                 {locationSection.mapTitle}
-                <span className="sr-only"> (área reservada)</span>
+                <span className="sr-only">{t.mapReserved}</span>
               </h3>
               <p className="max-w-xs text-muted">{locationSection.mapNote}</p>
               {address.mapsUrl && (
                 <a href={address.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                   <Navigation aria-hidden="true" className="size-5" />
-                  Como chegar
-                  <span className="sr-only"> (abre em nova aba)</span>
+                  {t.directions}
+                  <span className="sr-only"> {t.newTab}</span>
                 </a>
               )}
             </div>

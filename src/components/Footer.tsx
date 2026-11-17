@@ -1,11 +1,13 @@
 import { AtSign, Globe, MessageCircle } from "lucide-react";
-import { brand, contact, footer, nav, socials } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { waLink } from "../lib/whatsapp";
 import { Logo } from "./Logo";
 
 const socialIcons = [AtSign, Globe];
 
 export function Footer() {
+  const { site, t } = useSite();
+  const { brand, contact, footer, nav, socials } = site;
   return (
     <footer className="on-dark bg-brand-dark text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -14,8 +16,8 @@ export function Footer() {
           <p className="mt-4 max-w-sm">{footer.text}</p>
         </div>
 
-        <nav aria-label="Rodapé">
-          <h2 className="font-display text-lg font-extrabold">Navegação</h2>
+        <nav aria-label={t.footerNav}>
+          <h2 className="font-display text-lg font-extrabold">{t.navigation}</h2>
           <ul className="mt-3 flex flex-col">
             {nav.map((item) => (
               <li key={item.href}>
@@ -28,7 +30,7 @@ export function Footer() {
         </nav>
 
         <div>
-          <h2 className="font-display text-lg font-extrabold">Redes sociais</h2>
+          <h2 className="font-display text-lg font-extrabold">{t.socials}</h2>
           <ul className="mt-3 flex flex-col gap-1">
             {socials.map((s, i) => {
               const Icon = socialIcons[i % socialIcons.length];
@@ -43,7 +45,7 @@ export function Footer() {
                     >
                       <Icon aria-hidden="true" className="size-5" />
                       {s.label}
-                      <span className="sr-only"> (abre em nova aba)</span>
+                      <span className="sr-only"> {t.newTab}</span>
                     </a>
                   ) : (
                     <a
@@ -53,7 +55,7 @@ export function Footer() {
                     >
                       <Icon aria-hidden="true" className="size-5" />
                       {s.label}
-                      <span className="rounded-full bg-white/15 px-2 py-0.5 text-sm font-bold">demonstrativo</span>
+                      <span className="rounded-full bg-white/15 px-2 py-0.5 text-sm font-bold">{t.demoTag}</span>
                     </a>
                   )}
                 </li>
@@ -66,7 +68,7 @@ export function Footer() {
       <div className="border-t border-white/20">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-base sm:px-6 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} {brand.name}. Site demonstrativo.
+            © {new Date().getFullYear()} {brand.name}. {t.demoSite}
           </p>
           <p>
             {footer.creditPrefix} {contact.creatorName || "[NOME]"} — {footer.creditQuestion}{" "}
@@ -78,7 +80,7 @@ export function Footer() {
             >
               <MessageCircle aria-hidden="true" className="size-4" />
               {footer.creditCta}
-              <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+              <span className="sr-only"> {t.viaWhatsAppNewTab}</span>
             </a>
           </p>
         </div>

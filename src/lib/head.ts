@@ -38,17 +38,22 @@ export function buildJsonLd() {
 
 export function buildHeadTags(): string {
   const hero = images.hero;
+  const base = seo.siteUrl.replace(/\/$/, "");
   const tags = [
     `<title>${esc(seo.title)}</title>`,
     `<meta name="description" content="${esc(seo.description)}" />`,
     `<meta name="theme-color" content="${seo.themeColor}" />`,
-    seo.siteUrl ? `<link rel="canonical" href="${esc(seo.siteUrl)}/" />` : "",
+    // Versões por idioma (o inglês é a mesma página com ?lang=en).
+    base ? `<link rel="alternate" hreflang="pt-BR" href="${esc(base)}/" />` : "",
+    base ? `<link rel="alternate" hreflang="en" href="${esc(base)}/?lang=en" />` : "",
+    base ? `<link rel="alternate" hreflang="x-default" href="${esc(base)}/" />` : "",
     `<meta property="og:type" content="restaurant.restaurant" />`,
     `<meta property="og:locale" content="pt_BR" />`,
+    `<meta property="og:locale:alternate" content="en_US" />`,
     `<meta property="og:site_name" content="${esc(brand.name)}" />`,
     `<meta property="og:title" content="${esc(seo.title)}" />`,
     `<meta property="og:description" content="${esc(seo.description)}" />`,
-    seo.siteUrl ? `<meta property="og:url" content="${esc(seo.siteUrl)}/" />` : "",
+    base ? `<meta property="og:url" content="${esc(base)}/" />` : "",
     `<meta property="og:image" content="${esc(abs(seo.ogImage))}" />`,
     `<meta property="og:image:alt" content="${esc(hero.alt)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,

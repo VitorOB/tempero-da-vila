@@ -7,16 +7,9 @@ export function waLink(message: string, number: string = contact.whatsappNumber)
   return digits ? `https://wa.me/${digits}?text=${text}` : `https://wa.me/?text=${text}`;
 }
 
-/** Mensagem da marmitex com o tamanho escolhido preenchido. */
-export function marmitexMessage(size?: string): string {
-  const base = contact.marmitexMessage;
+/** Mensagem da marmitex (no idioma atual) com o tamanho escolhido preenchido. */
+export function marmitexMessage(base: string, size?: string): string {
   if (!size) return base;
-  return /Tamanho:/i.test(base)
-    ? base.replace(/Tamanho:[^,]*/i, `Tamanho: ${size}`)
-    : `${base} Tamanho: ${size}.`;
-}
-
-/** Mensagem pedindo um prato específico. */
-export function dishMessage(dish: string): string {
-  return `Olá! Gostaria de pedir: ${dish}.`;
+  const label = /(Tamanho|Size):[^,]*/i;
+  return label.test(base) ? base.replace(label, (m) => `${m.split(":")[0]}: ${size}`) : `${base} ${size}.`;
 }
