@@ -10,7 +10,8 @@
 export const contact = {
   whatsappNumber: "", // 5531999999999 — preencher antes de publicar (só números, com DDI e DDD)
   whatsappMessage: "Olá! Gostaria de fazer um pedido.",
-  marmitexMessage: "Olá! Quero pedir uma marmitex. Tamanho: , prato: , endereço: ",
+  marmitexMessage:
+    "Olá! Quero pedir uma marmitex. Tamanho: , prato: , endereço: ",
   deliveryUrl: "", // link do restaurante no app de delivery, se houver (vazio = botão escondido)
   creatorName: "",
   creatorWhatsapp: "",
@@ -32,7 +33,7 @@ export const seo = {
   description:
     "Almoço com gosto de casa, de segunda a sábado, das 11h às 15h. Prato do dia, marmitex para entrega e retirada e feijoada no sábado. Peça pelo WhatsApp.",
   /** URL pública do site, sem barra no final (ex.: https://tempero-da-vila.vercel.app). Usada no Open Graph e no JSON-LD. */
-  siteUrl: "",
+  siteUrl: "https://tempero-da-vila-tau.vercel.app/",
   ogImage: "/images/hero-1600.webp",
   themeColor: "#2E6B3A",
 };
@@ -63,19 +64,22 @@ export const hero = {
 export const weekSection = {
   eyebrow: "Cardápio da semana",
   title: "Cada dia, um prato do dia",
-  intro: "Um prato diferente por dia, feito na hora e com os acompanhamentos da casa.",
+  intro:
+    "Um prato diferente por dia, feito na hora e com os acompanhamentos da casa.",
   closedToday: "Fechado hoje — volte segunda!",
   saturdayTitle: "Sábado é dia de feijoada",
   saturdayText:
     "Feijoada completa, com arroz, couve, farofa, laranja e torresmo. Sai rápido, então garanta a sua cedo.",
   saturdayCta: "Encomendar feijoada",
-  saturdayMessage: "Olá! Quero encomendar feijoada para sábado. Quantidade: , retirada ou entrega: ",
+  saturdayMessage:
+    "Olá! Quero encomendar feijoada para sábado. Quantidade: , retirada ou entrega: ",
 };
 
 export const menuSection = {
   eyebrow: "Cardápio",
   title: "O que tem pra comer",
-  intro: "Escolha a categoria. Para pedir, é só mandar o nome do prato no WhatsApp.",
+  intro:
+    "Escolha a categoria. Para pedir, é só mandar o nome do prato no WhatsApp.",
   cta: "Pedir pelo WhatsApp",
 };
 
@@ -85,7 +89,8 @@ export const marmitexSection = {
   text: "O prato do dia ou qualquer executivo do cardápio, bem embalado e quentinho. Ideal pro almoço no trabalho.",
   sizesLabel: "Escolha o tamanho",
   cta: "Pedir marmitex pelo WhatsApp",
-  officeNote: "Pedido para a equipe do escritório? Mande a lista que a gente organiza e entrega junto.",
+  officeNote:
+    "Pedido para a equipe do escritório? Mande a lista que a gente organiza e entrega junto.",
 };
 
 export const howSection = {
@@ -109,7 +114,12 @@ export const locationSection = {
 /* Imagens (WebP em 800 e 1600 px; ver CREDITS.md)                     */
 /* ------------------------------------------------------------------ */
 
-export type ImageData = { src: string; width: number; height: number; alt: string };
+export type ImageData = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
 
 export const images = {
   hero: {
@@ -178,20 +188,66 @@ export type WeekDish = {
 };
 
 export const weekMenu: WeekDish[] = [
-  { weekday: 1, name: "Segunda", short: "Seg", dish: "Bife acebolado", sides: "Arroz, feijão, batata frita e salada" },
-  { weekday: 2, name: "Terça", short: "Ter", dish: "Frango assado com farofa", sides: "Arroz, feijão, salada e legumes" },
-  { weekday: 3, name: "Quarta", short: "Qua", dish: "Feijão tropeiro com bisteca", sides: "Arroz, couve, ovo e salada" },
-  { weekday: 4, name: "Quinta", short: "Qui", dish: "Strogonoff de frango", sides: "Arroz, batata palha e salada" },
-  { weekday: 5, name: "Sexta", short: "Sex", dish: "Peixe empanado", sides: "Arroz, feijão, purê e salada" },
-  { weekday: 6, name: "Sábado", short: "Sáb", dish: "Feijoada completa", sides: "Arroz, couve, farofa, laranja e torresmo" },
+  {
+    weekday: 1,
+    name: "Segunda",
+    short: "Seg",
+    dish: "Bife acebolado",
+    sides: "Arroz, feijão, batata frita e salada",
+  },
+  {
+    weekday: 2,
+    name: "Terça",
+    short: "Ter",
+    dish: "Frango assado com farofa",
+    sides: "Arroz, feijão, salada e legumes",
+  },
+  {
+    weekday: 3,
+    name: "Quarta",
+    short: "Qua",
+    dish: "Feijão tropeiro com bisteca",
+    sides: "Arroz, couve, ovo e salada",
+  },
+  {
+    weekday: 4,
+    name: "Quinta",
+    short: "Qui",
+    dish: "Strogonoff de frango",
+    sides: "Arroz, batata palha e salada",
+  },
+  {
+    weekday: 5,
+    name: "Sexta",
+    short: "Sex",
+    dish: "Peixe empanado",
+    sides: "Arroz, feijão, purê e salada",
+  },
+  {
+    weekday: 6,
+    name: "Sábado",
+    short: "Sáb",
+    dish: "Feijoada completa",
+    sides: "Arroz, couve, farofa, laranja e torresmo",
+  },
 ];
 
 /* ------------------------------------------------------------------ */
 /* Cardápio (sem preços)                                               */
 /* ------------------------------------------------------------------ */
 
-export type MenuItem = { name: string; description: string; image?: ImageKey; tag?: string };
-export type MenuCategory = { id: string; label: string; note?: string; items: MenuItem[] };
+export type MenuItem = {
+  name: string;
+  description: string;
+  image?: ImageKey;
+  tag?: string;
+};
+export type MenuCategory = {
+  id: string;
+  label: string;
+  note?: string;
+  items: MenuItem[];
+};
 
 const SIDES_NOTE = "Acompanha arroz, feijão, salada e guarnição do dia.";
 
@@ -201,11 +257,29 @@ export const menu: MenuCategory[] = [
     label: "Pratos executivos",
     note: SIDES_NOTE,
     items: [
-      { name: "Bife a cavalo", description: "Bife em tiras com ovo frito por cima e batata frita.", image: "pratoExecutivo", tag: "Mais pedido" },
-      { name: "Frango à parmegiana", description: "Filé empanado com molho de tomate caseiro e queijo gratinado." },
-      { name: "Picadinho de carne", description: "Carne em cubos no molho, com ervilha e cheiro-verde." },
-      { name: "Filé de peixe empanado", description: "Peixe sequinho e crocante, com limão." },
-      { name: "Omelete recheada", description: "Com queijo, tomate e legumes. Opção sem carne." },
+      {
+        name: "Bife a cavalo",
+        description: "Bife em tiras com ovo frito por cima e batata frita.",
+        image: "pratoExecutivo",
+        tag: "Mais pedido",
+      },
+      {
+        name: "Frango à parmegiana",
+        description:
+          "Filé empanado com molho de tomate caseiro e queijo gratinado.",
+      },
+      {
+        name: "Picadinho de carne",
+        description: "Carne em cubos no molho, com ervilha e cheiro-verde.",
+      },
+      {
+        name: "Filé de peixe empanado",
+        description: "Peixe sequinho e crocante, com limão.",
+      },
+      {
+        name: "Omelete recheada",
+        description: "Com queijo, tomate e legumes. Opção sem carne.",
+      },
     ],
   },
   {
@@ -213,42 +287,85 @@ export const menu: MenuCategory[] = [
     label: "Grelhados",
     note: SIDES_NOTE,
     items: [
-      { name: "Filé de frango grelhado", description: "Temperado na hora, dourado na chapa.", image: "grelhado" },
-      { name: "Contrafilé grelhado", description: "Bife alto, no ponto que você pedir." },
-      { name: "Bisteca suína", description: "Bisteca na chapa, com cebola dourada." },
-      { name: "Linguiça toscana", description: "Linguiça grelhada, servida com vinagrete." },
+      {
+        name: "Filé de frango grelhado",
+        description: "Temperado na hora, dourado na chapa.",
+        image: "grelhado",
+      },
+      {
+        name: "Contrafilé grelhado",
+        description: "Bife alto, no ponto que você pedir.",
+      },
+      {
+        name: "Bisteca suína",
+        description: "Bisteca na chapa, com cebola dourada.",
+      },
+      {
+        name: "Linguiça toscana",
+        description: "Linguiça grelhada, servida com vinagrete.",
+      },
     ],
   },
   {
     id: "porcoes",
     label: "Porções",
     items: [
-      { name: "Porção de salgadinhos", description: "Bolinhos e banana empanada, fritos na hora.", image: "porcao" },
-      { name: "Batata frita", description: "Sequinha e crocante. Boa para dividir." },
-      { name: "Mandioca frita", description: "Macia por dentro e crocante por fora." },
-      { name: "Calabresa acebolada", description: "Calabresa na chapa com bastante cebola." },
-      { name: "Torresmo", description: "Pururuca, crocante, do jeito mineiro." },
+      {
+        name: "Porção de salgadinhos",
+        description: "Bolinhos e banana empanada, fritos na hora.",
+        image: "porcao",
+      },
+      {
+        name: "Batata frita",
+        description: "Sequinha e crocante. Boa para dividir.",
+      },
+      {
+        name: "Mandioca frita",
+        description: "Macia por dentro e crocante por fora.",
+      },
+      {
+        name: "Calabresa acebolada",
+        description: "Calabresa na chapa com bastante cebola.",
+      },
+      {
+        name: "Torresmo",
+        description: "Pururuca, crocante, do jeito mineiro.",
+      },
     ],
   },
   {
     id: "bebidas",
     label: "Bebidas",
     items: [
-      { name: "Suco natural do dia", description: "Feito na hora. Pergunte o sabor de hoje." },
+      {
+        name: "Suco natural do dia",
+        description: "Feito na hora. Pergunte o sabor de hoje.",
+      },
       { name: "Limonada", description: "Gelada, com ou sem açúcar." },
       { name: "Refrigerante", description: "Lata ou garrafa de 2 litros." },
       { name: "Água mineral", description: "Com ou sem gás." },
-      { name: "Cafezinho", description: "Passado na hora, cortesia depois do almoço." },
+      {
+        name: "Cafezinho",
+        description: "Passado na hora, cortesia depois do almoço.",
+      },
     ],
   },
   {
     id: "sobremesas",
     label: "Sobremesas",
     items: [
-      { name: "Pudim de leite", description: "Lisinho, com calda de caramelo.", image: "sobremesa", tag: "Da casa" },
+      {
+        name: "Pudim de leite",
+        description: "Lisinho, com calda de caramelo.",
+        image: "sobremesa",
+        tag: "Da casa",
+      },
       { name: "Mousse de maracujá", description: "Leve e azedinho na medida." },
       { name: "Doce de leite com queijo", description: "O clássico da roça." },
-      { name: "Salada de frutas", description: "Frutas da estação picadas na hora." },
+      {
+        name: "Salada de frutas",
+        description: "Frutas da estação picadas na hora.",
+      },
     ],
   },
 ];
@@ -264,8 +381,16 @@ export const marmitexSizes = [
 ];
 
 export const marmitexOptions = [
-  { icon: "bike", title: "Entrega", description: "Levamos até você na região. A taxa você confere no WhatsApp." },
-  { icon: "store", title: "Retirada no balcão", description: "Peça antes e é só pegar, sem fila." },
+  {
+    icon: "bike",
+    title: "Entrega",
+    description: "Levamos até você na região. A taxa você confere no WhatsApp.",
+  },
+  {
+    icon: "store",
+    title: "Retirada no balcão",
+    description: "Peça antes e é só pegar, sem fila.",
+  },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -273,9 +398,21 @@ export const marmitexOptions = [
 /* ------------------------------------------------------------------ */
 
 export const steps = [
-  { icon: "utensils", title: "Escolha o prato", description: "Veja o prato do dia ou escolha no cardápio." },
-  { icon: "message", title: "Chame a gente", description: "Mande o pedido no WhatsApp ou peça pelo app de delivery." },
-  { icon: "bag", title: "Receba ou retire", description: "Entregamos quentinho, ou você retira no balcão." },
+  {
+    icon: "utensils",
+    title: "Escolha o prato",
+    description: "Veja o prato do dia ou escolha no cardápio.",
+  },
+  {
+    icon: "message",
+    title: "Chame a gente",
+    description: "Mande o pedido no WhatsApp ou peça pelo app de delivery.",
+  },
+  {
+    icon: "bag",
+    title: "Receba ou retire",
+    description: "Entregamos quentinho, ou você retira no balcão.",
+  },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -329,7 +466,8 @@ export const footer = {
   creditPrefix: "Site demonstrativo criado por",
   creditQuestion: "Quer um site assim para o seu restaurante?",
   creditCta: "Fale comigo",
-  creditMessage: "Olá! Vi o site demonstrativo do Tempero da Vila e quero um site para o meu restaurante.",
+  creditMessage:
+    "Olá! Vi o site demonstrativo do Tempero da Vila e quero um site para o meu restaurante.",
 };
 
 export const stickyBar = {
