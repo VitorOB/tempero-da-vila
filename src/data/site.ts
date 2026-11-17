@@ -13,8 +13,8 @@ export const contact = {
   marmitexMessage:
     "Olá! Quero pedir uma marmitex. Tamanho: , prato: , endereço: ",
   deliveryUrl: "", // link do restaurante no app de delivery, se houver (vazio = botão escondido)
-  creatorName: "",
-  creatorWhatsapp: "",
+  creatorName: "Vitor Otávio",
+  creatorWhatsapp: "5531993628211",
 };
 
 /* ------------------------------------------------------------------ */
